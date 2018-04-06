@@ -7,95 +7,57 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>css/bootstrap.min.css" type="text/css">
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/">
 	<title>Jack's Sparrow Aviary</title>
 	
 </head>
-<body data-spy="scroll" data-target="#my-navbar">
-	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" id="my-navbar">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-					<span class ="sr-only">Toggle Navigation</span>
-					<span class ="icon-bar"></span>
-					<span class ="icon-bar"></span>
-					<span class ="icon-bar"></span>
-				</button>
-
-				<a href="#" class="navbar-brand">Jack's Sparrow Aviary</a>
-			</div><!-- END Navbar header-->
-
-			<div id="navbar-collapse" class="collapse navbar-collapse">
-
-			<a href="" class="btn btn-info navbar-btn navbar-right">Download Now</a>
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#feedback">Feedback</a></li>
-					<li><a href="#gallery">Gallery</a></li>
-					<li><a href="#features">Features</a></li>
-					<li><a href="#FAQ">FAQ</a></li>
-					<li><a href="#contact">Contact Us</a></li>
-				</ul>
-			</div>
-		</div><!-- END container-->
-	</nav><!-- END navbar-->
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="#">Jack's Sparrow Aviary</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+	    <div class="navbar-nav">
+	      <a class="nav-item nav-link active" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+	      <a class="nav-item nav-link" href="products_page.jsp">Products</a>
+	      <a class="nav-item nav-link" href="services_page.jsp">Services</a>
+	      <a class="nav-item nav-link" href="about_us_page.jsp">About Us</a>
+	    </div>
+	  </div>
+	</nav>
 	
-	<!-- Gallery -->
-	<div class="container">
-		<section>
-			<div class="page-header" id="gallery">
-				<h2>Gallery<small> Here is the gallery</small></h2>
-			</div>
+	<!-- carousel starts here -->
+	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+	  <ol class="carousel-indicators">
+	    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+	    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+	    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+	  </ol>
+	  <div class="carousel-inner">
+	    <div class="carousel-item active">
+	      <img class="carousel-img" src="images/yellow_bird.jpg" alt="First slide">
+	    </div>
+	    <div class="carousel-item">
+	      <img class="carousel-img" src="images/bird_services.jpg" alt="Second slide">
+	    </div>
+	    <div class="carousel-item">
+	      <img class="carousel-img" src="images/discounts.jpg" alt="Third slide">
+	    </div>
+	  </div>
+	  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div>
 
-			<div id="screenshot-carousel" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#screenshot-carousel" data-slide-to="0" class="active" ></li>
-					<li data-target="#screenshot-carousel" data-slide-to="1"></li>
-					<li data-target="#screenshot-carousel" data-slide-to="2"></li>
-					<li data-target="#screenshot-carousel" data-slide-to="3"></li>
-				</ol>
-
-				<div class="carousel-inner">
-					<div class="item active">
-						<img src="assets/discounts.jpg" alt="discounts">
-						<div class="carousel-caption">
-							<h3>Our Discounts!</h3>
-							<p>Check out our sale items!</p>
-						</div>
-					</div>
-					<div class="item">
-						<img src="assets/bird_cage.jpg" alt="NOM NOM NOM">
-						<div class="carousel-caption">
-							<h3>Squirrel with doughnut</h3>
-							<p>NOM NOM NOM</p>
-						</div>
-					</div>
-					<div class="item">
-						<img src="assets/bird_services.jpg" alt="NOM NOM NOM">
-						<div class="carousel-caption">
-							<h3>Squirrel with doughnut</h3>
-							<p>NOM NOM NOM</p>
-						</div>
-					</div>
-					<div class="item">
-						<img src="assets/yellow_bird.jpg" alt="NOM NOM NOM">
-						<div class="carousel-caption">
-							<h3>Squirrel with doughnut</h3>
-							<p>NOM NOM NOM</p>
-						</div>
-					</div>
-				</div><!-- END carousel inner -->
-				<a href="#screenshot-carousel" class="left carousel-control" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-				</a>
-				<a href="#screenshot-carousel" class="right carousel-control" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-				</a>
-			</div><!-- END carousel -->
-		</section>
-	</div><!-- END container -->
-	
-	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
