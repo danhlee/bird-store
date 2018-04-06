@@ -1,4 +1,12 @@
-.carousel-img {
-	width:640px;
-	height:360px;
+.carousel-inner > .carousel-item > img {
+    width: 100%;
+    height: auto;
+}
+
+.info-pane {
+	font-size: 500%;
+}
+
+.center {
+	text-align: center;
 }
