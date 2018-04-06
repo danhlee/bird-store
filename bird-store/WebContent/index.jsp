@@ -132,29 +132,28 @@
 	                <h6 class="text-uppercase font-weight-bold">
 	                    <a data-toggle="modal" href="#locationModal">Location</a>
 	                </h6>    
-	                    <!-- Location modal -->
-	                    <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-						  <div class="modal-dialog modal-dialog-centered" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title" id="location-modal">Location</h5>
-						        
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
-						      
-						      <div class="modal-body">
-						        <p>5500 St Louis Ave, Chicago, IL 60625</p><br/>
-						        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11863.684650633799!2d-87.7182002!3d41.9805024!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5a463e10f151a258!2sNEIU!5e0!3m2!1sen!2sus!4v1523004957258" width="100%" height="auto" frameborder="0" style="border:0" allowfullscreen></iframe>
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-	                
+                    <!-- Location modal -->
+                    <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="location-modal">Location</h5>
+					        
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      
+					      <div class="modal-body">
+					        <p>5500 St Louis Ave, Chicago, IL 60625</p><br/>
+					        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11863.684650633799!2d-87.7182002!3d41.9805024!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5a463e10f151a258!2sNEIU!5e0!3m2!1sen!2sus!4v1523004957258" width="100%" height="auto" frameborder="0" style="border:0" allowfullscreen></iframe>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 	            </div>
 
 				<!-- Contact -->
