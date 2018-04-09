@@ -5,5 +5,4 @@
 		username="customer" password="customer"
 		driverClassName="com.mysql.jdbc.Driver"
 		url="jdbc:mysql://localhost:3306/bird_store"/>
-
 </Context>
