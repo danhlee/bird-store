@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,39 @@
 	  </div>
 	</nav>
 	<br/><br/><br/>
-	PRODUCTS HERE!
+	<div class="container">
+  <h2>Products List</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Quantity Remaining</th>
+        <th>Add to Cart</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <c:forEach var="tempProduct" items="${product_list}">
+        
+		 	<!-- set up add to cart update link for each student -->
+		 	<c:url var="tempLink" value="Controller_Store">
+		 		<c:param name="command" value="LOAD" />
+		 		<c:param name="productId" value="${tempProduct.id}" />
+		 	</c:url>
+		 	
+		 	<tr>
+		 		<td> ${tempStudent.productName} </td>
+		 		<td> ${tempStudent.price} </td>
+		 		<td> ${tempStudent.quantity} </td>
+		 		<td> 
+		 			<a href="${tempLink}">Add</a>
+	 			</td>
+		 	</tr>
+		 </c:forEach>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>

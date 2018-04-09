@@ -1,9 +1,114 @@
 package com.jackssparrowaviary.store;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
 public class ProductDao {
-
-	public ProductDao() {
-		// TODO Auto-generated constructor stub
+	private DataSource dataSource;
+	
+	public ProductDao(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
+	
+	// get products (that have quantity > 0)
+	public List<Product> getProductsByName() throws Exception {
+		List<Product> productList = new ArrayList<>();
+		
+		Connection myConnection = null;
+		Statement myStatement = null;
+		ResultSet myResultSet = null;
+		
+		try {
+			// get a connection
+			myConnection = dataSource.getConnection();
+			
+			// create sql statement object
+			String sql = "SELECT * FROM product WHERE quantity > 0 ORDER BY product_name";
+			myStatement = myConnection.createStatement();
+			
+			// execute query
+			myResultSet = myStatement.executeQuery(sql);
+			
+			while (myResultSet.next()) {
+				int id = myResultSet.getInt("id");
+				String productName = myResultSet.getString("product_name");
+				double price = myResultSet.getDouble("price");
+				int quantity = myResultSet.getInt("quantity");
+				
+				Product tempProduct = new Product(id, productName, price, quantity);
+				
+				productList.add(tempProduct);
+			}
+			return productList;
+			
+		}
+		finally {
+			close(myConnection, myStatement, myResultSet);
+		}
+		
+	}
+	
+	// get products (that have quantity > 0) SORT by price
+	public List<Product> getProductsByPrice() throws Exception {
+		List<Product> productList = new ArrayList<>();
+		
+		Connection myConnection = null;
+		Statement myStatement = null;
+		ResultSet myResultSet = null;
+		
+		try {
+			// get a connection
+			myConnection = dataSource.getConnection();
+			
+			// create sql statement object
+			String sql = "SELECT * FROM product WHERE quantity > 0 ORDER BY price";
+			myStatement = myConnection.createStatement();
+			
+			// execute query
+			myResultSet = myStatement.executeQuery(sql);
+			
+			while (myResultSet.next()) {
+				int id = myResultSet.getInt("id");
+				String productName = myResultSet.getString("product_name");
+				double price = myResultSet.getDouble("price");
+				int quantity = myResultSet.getInt("quantity");
+				
+				Product tempProduct = new Product(id, productName, price, quantity);
+				
+				productList.add(tempProduct);
+			}
+			return productList;
+			
+		}
+		finally {
+			close(myConnection, myStatement, myResultSet);
+		}
+		
+	}
+	
+	
+	//  quantity (when customer adds to cart and checks out [subtracts quantity from total])
 
+	private void close(Connection myConnection, Statement myStatement, ResultSet myResultSet) {
+		try {
+			if (myConnection != null) {
+				myConnection.close();
+			}
+			if (myStatement != null) {
+				myStatement.close();
+			}
+			if (myResultSet != null) {
+				myResultSet.close();
+			}
+		}
+		
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
