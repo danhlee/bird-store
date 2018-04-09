@@ -25,6 +25,7 @@
 	      <a class="nav-item nav-link" href="products_page.jsp">Products</a>
 	      <a class="nav-item nav-link" href="services_page.jsp">Services</a>
 	      <a class="nav-item nav-link" href="events_page.jsp">Events</a>
+	      <a class="nav-item nav-link" href="checkout_page.jsp">Cart</a>
 	    </div>
 	  </div>
 	</nav>

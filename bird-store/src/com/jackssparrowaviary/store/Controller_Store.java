@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
@@ -52,6 +53,9 @@ public class Controller_Store extends HttpServlet {
 			case "LIST_BY_PRICE":
 				listProductsByPrice(request, response);
 				break;
+			case "ADD_TO_CART":
+				addToCart(request, response);
+				break;
 			default:
 				listProductsByName(request, response);
 			}
@@ -59,6 +63,37 @@ public class Controller_Store extends HttpServlet {
 		catch (Exception e) {
 			throw new ServletException(e);
 		}
+	}
+
+
+	private void addToCart(HttpServletRequest request, HttpServletResponse response) {
+		// check to see if cart already exists
+		Cart shoppingCart;
+		Integer productId = Integer.parseInt(request.getParameter("product_id"));
+		String productName = request.getParameter("product_name");
+		Double productPrice = Double.parseDouble(request.getParameter("product_price"));
+		Integer productQuantity = Integer.parseInt(request.getParameter("product_quantity"));
+		Product tempProduct = new Product(productId, productName, productPrice, productQuantity);
+		// TODO purchase quantity
+		int purchaseQuantity = 1;
+		
+		HttpSession session = request.getSession();
+	
+		shoppingCart = (Cart) session.getAttribute("shopping_cart");
+		
+		
+		if(shoppingCart == null) {
+			// create a cart object, that contains a HashMap as a data field
+			shoppingCart = new Cart();
+			session.setAttribute("shopping_cart", shoppingCart.getCartItems());
+			session.setMaxInactiveInterval(60*60);
+		}
+		
+		// add item to session object
+		shoppingCart.addToCart(tempProduct);
+		
+		session.setAttribute("shopping_cart", shoppingCart.getCartItems());
+		
 	}
 
 

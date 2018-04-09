@@ -22,47 +22,56 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav">
-	      <a class="nav-item nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
-	      <a class="nav-item nav-link active" href="products_page.jsp">Products</a>
+	      <a class="nav-item nav-link" href="index.jsp">Home </a>
+	      <a class="nav-item nav-link active" href="products_page.jsp">Products<span class="sr-only">(current)</span></a>
 	      <a class="nav-item nav-link" href="services_page.jsp">Services</a>
 	      <a class="nav-item nav-link" href="events_page.jsp">Events</a>
+	      <a class="nav-item nav-link" href="checkout_page.jsp">Cart</a>
 	    </div>
 	  </div>
 	</nav>
 	<br/><br/><br/>
 	<div class="container">
-  <h2>Products List</h2>            
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Product Name</th>
-        <th>Price</th>
-        <th>Quantity Remaining</th>
-        <th>Add to Cart</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <c:forEach var="tempProduct" items="${product_list}">
-        
-		 	<!-- set up add to cart update link for each student -->
-		 	<c:url var="tempLink" value="Controller_Store">
-		 		<c:param name="command" value="LOAD" />
-		 		<c:param name="productId" value="${tempProduct.id}" />
-		 	</c:url>
-		 	
-		 	<tr>
-		 		<td> ${tempStudent.productName} </td>
-		 		<td> ${tempStudent.price} </td>
-		 		<td> ${tempStudent.quantity} </td>
-		 		<td> 
-		 			<a href="${tempLink}">Add</a>
-	 			</td>
-		 	</tr>
-		 </c:forEach>
-      </tr>
-    </tbody>
-  </table>
+	
+  <h2>Products List</h2>
+  <form action="checkout_page.jsp">         
+	  <table class="table">
+	    <thead>
+	      <tr>
+	        <th>Product Name</th>
+	        <th>Price</th>
+	        <th>Quantity Remaining</th>
+	        <th>Add to Cart</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <c:forEach var="tempProduct" items="${product_list}">
+	        
+			 	<!-- set up add to cart update link for each student -->
+			 	<c:url var="tempLink" value="Controller_Store">
+			 		<c:param name="command" value="ADD_TO_CART" />
+			 		<c:param name="product_id" value="${tempProduct.id}" />
+			 		<c:param name="product_name" value="${tempProduct.productName}" />
+			 		<c:param name="product_price" value="${tempProduct.price}" />
+			 		<c:param name="product_quantity" value="${tempProduct.quantity}" />
+			 	</c:url>
+			 	
+			 	<tr>
+			 		<td> ${tempProduct.productName} </td>
+			 		<td> ${tempProduct.price} </td>
+			 		<td> ${tempProduct.quantity} </td>
+			 		<td>
+			 			<input type="submit" value="Add to cart">
+			 			<a href="${tempLink}">Add</a>
+		 			</td>
+			 	</tr>
+			 </c:forEach>
+	      </tr>
+	    </tbody>
+	  </table>
+	  <input type="submit" value="Checkout">
+  </form>
 </div>
 </body>
 </html>
