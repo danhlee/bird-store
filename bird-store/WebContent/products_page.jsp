@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="com.jackssparrowaviary.store.Controller_Store"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,7 @@
 	
 </head>
 <body>
+	<jsp:forward page="Controller_Store?method=GET" ></jsp:forward>
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	  <a class="navbar-brand" href="#">Jack's Sparrow Aviary</a>
@@ -31,47 +33,50 @@
 	  </div>
 	</nav>
 	<br/><br/><br/>
-	<div class="container">
 	
-  <h2>Products List</h2>
-  <form action="checkout_page.jsp">         
-	  <table class="table">
-	    <thead>
-	      <tr>
-	        <th>Product Name</th>
-	        <th>Price</th>
-	        <th>Quantity Remaining</th>
-	        <th>Add to Cart</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <tr>
-	        <c:forEach var="tempProduct" items="${product_list}">
-	        
-			 	<!-- set up add to cart update link for each student -->
-			 	<c:url var="tempLink" value="Controller_Store">
-			 		<c:param name="command" value="ADD_TO_CART" />
-			 		<c:param name="product_id" value="${tempProduct.id}" />
-			 		<c:param name="product_name" value="${tempProduct.productName}" />
-			 		<c:param name="product_price" value="${tempProduct.price}" />
-			 		<c:param name="product_quantity" value="${tempProduct.quantity}" />
-			 	</c:url>
-			 	
-			 	<tr>
-			 		<td> ${tempProduct.productName} </td>
-			 		<td> ${tempProduct.price} </td>
-			 		<td> ${tempProduct.quantity} </td>
-			 		<td>
-			 			<input type="submit" value="Add to cart">
-			 			<a href="${tempLink}">Add</a>
-		 			</td>
-			 	</tr>
-			 </c:forEach>
-	      </tr>
-	    </tbody>
-	  </table>
-	  <input type="submit" value="Checkout">
-  </form>
-</div>
+	
+	<a href="./Controller_Store">Call MyServlet</a>
+	
+	<div class="container">
+	  <h2>Products List</h2>
+	  <form action="./Controller_Store">         
+		  <table class="table">
+		    <thead>
+		      <tr>
+		        <th>Product Name</th>
+		        <th>Price</th>
+		        <th>Quantity Remaining</th>
+		        <th>Add to Cart</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr>
+		      	<c:forEach var="tempProduct" items="${product_list}">
+		        
+				 	<!-- set up add to cart update link for each student -->
+				 	<c:url var="tempLink" value="Controller_Store">
+				 		<c:param name="command" value="ADD_TO_CART" />
+				 		<c:param name="product_id" value="${tempProduct.id}" />
+				 		<c:param name="product_name" value="${tempProduct.productName}" />
+				 		<c:param name="product_price" value="${tempProduct.price}" />
+				 		<c:param name="product_quantity" value="${tempProduct.quantity}" />
+				 	</c:url>
+				 	
+				 	<tr>
+				 		<td> ${tempProduct.productName} </td>
+				 		<td> ${tempProduct.price} </td>
+				 		<td> ${tempProduct.quantity} </td>
+				 		<td>
+				 			<input type="submit" value="Add to cart">
+				 			<a href="${tempLink}">Add</a>
+			 			</td>
+				 	</tr>
+				 </c:forEach>
+		      </tr>
+		    </tbody>
+		  </table>
+		  <input type="submit" value="Checkout">
+	  </form>
+	</div>
 </body>
 </html>

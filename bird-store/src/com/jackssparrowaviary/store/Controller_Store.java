@@ -75,7 +75,7 @@ public class Controller_Store extends HttpServlet {
 		Integer productQuantity = Integer.parseInt(request.getParameter("product_quantity"));
 		Product tempProduct = new Product(productId, productName, productPrice, productQuantity);
 		// TODO purchase quantity
-		int purchaseQuantity = 1;
+		// int purchaseQuantity = 1;
 		
 		HttpSession session = request.getSession();
 	
