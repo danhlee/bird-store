@@ -44,7 +44,7 @@ INSERT INTO product(product_name, price, quantity) VALUES
     ('Jacks Habitat Cleaner Brush', 14.89, 20),
     ('Jacks 3 in 1 Odor Destroyer', 14.89, 20);
     
-SELECT * FROM product;
+SELECT * FROM product ORDER BY product_name;
     
     
     

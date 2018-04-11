@@ -1,7 +1,9 @@
 package com.jackssparrowaviary.store;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,22 @@ public class ProductDao {
 		
 	}
 	
-	
+	public void updateQuantity(Product tempProduct) throws SQLException {
+		int cartItemId = tempProduct.getId();
+		
+		Connection myConnection = null;
+		PreparedStatement myStatement = null;
+		try {
+			myConnection = dataSource.getConnection();
+			String sql = "UPDATE product SET quantity = quantity - 1 WHERE id = ?";
+			myStatement = myConnection.prepareStatement(sql);
+			myStatement.setInt(1, cartItemId);
+			myStatement.execute();
+		}
+		finally {
+			close(myConnection, myStatement, null);
+		}
+	}
 	//  quantity (when customer adds to cart and checks out [subtracts quantity from total])
 
 	private void close(Connection myConnection, Statement myStatement, ResultSet myResultSet) {
@@ -111,6 +128,5 @@ public class ProductDao {
 			e.printStackTrace();
 		}
 	}
-
 
 }

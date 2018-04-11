@@ -1,8 +1,11 @@
 package com.jackssparrowaviary.store;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -63,6 +66,9 @@ public class Controller_Store extends HttpServlet {
 			case "REMOVE_FROM_CART":
 				removeFromCart(request, response);
 				break;
+			case "PURCHASE":
+				purchase(request, response);
+				break;
 			default:
 				listProductsByName(request, response);
 			}
@@ -72,6 +78,42 @@ public class Controller_Store extends HttpServlet {
 		}
 	}
 
+
+	@SuppressWarnings("unchecked")
+	private void purchase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		List<Product> shoppingCart;
+		
+		HttpSession session = request.getSession();
+		shoppingCart = (ArrayList<Product>) session.getAttribute("shopping_cart");
+		
+		// if shopping cart is null or empty
+		if (shoppingCart == null || shoppingCart.size() == 0) {
+			// get dispatcher and set destination to checkout page
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/purchase_fail_page.jsp");
+			dispatcher.forward(request, response);
+		}
+		// if cart isn't empty
+		else {
+			ListIterator<Product> iterator = shoppingCart.listIterator();
+			Product tempProduct;
+			
+			while (iterator.hasNext()) {
+				tempProduct = iterator.next();
+				productDao.updateQuantity(tempProduct);
+				iterator.remove();
+			}
+			
+			
+			session.setAttribute("shopping_cart", shoppingCart);
+			request.setAttribute("confirmation_number", UUID.randomUUID());
+			// get dispatcher and set destination to checkout page
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/confirmation_page.jsp");
+			dispatcher.forward(request, response);
+			
+		}
+		
+		
+	}
 
 	@SuppressWarnings("unchecked")
 	private void removeFromCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -128,11 +170,11 @@ public class Controller_Store extends HttpServlet {
 		
 		String myCommand = request.getParameter("command");
 		
-		if (myCommand == "LIST_BY_NAME") {
-			listProductsByName(request, response);
+		if (myCommand == "LIST_BY_PRICE") {
+			listProductsByPrice(request, response);
 		}
 		else {
-			listProductsByPrice(request, response);
+			listProductsByName(request, response);
 		}
 		
 	}
