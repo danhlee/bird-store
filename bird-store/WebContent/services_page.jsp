@@ -30,7 +30,52 @@
 	  </div>
 	</nav>
 	<br/><br/><br/>
-	SERVICES
+ 	<form action="*">
+ 		<fieldset class = "fieldset">
+ 			<legend class = "legend"> Walk in Services </legend>
+ 				
+ 				<p> Wing, nail and beak trimming for birds. </p>
+ 				<p> Bird DNA gender tests. </p>
+ 				<p> Free water tests and consultation. </p>
+ 				<p> Animal sitting services separate from store, please ask an associate for details. </p>
+ 		
+ 		</fieldset><br/>
+ 		
+ 		<fieldset class = "fieldset">
+ 			<legend class = "legend"> Cleaning / Grooming </legend>
+ 				
+ 				<p> Wing trimming. </p>
+ 				<p> Nail trimming. </p>
+ 				<p> Beak trimming. </p>
+ 				
+ 		</fieldset><br/>
+ 		
+ 		<fieldset class = "fieldset">
+ 			<legend class = "legend"> Training's </legend>
+ 			
+ 				<p> 1. Discourage biting and aggression. </p>
+ 				<p> 2. Teach Your Bird the "Step-Up" Command. </p>
+ 				<p> 3. Teach Your Bird to Wave Hello. </p>
+ 				<p> 4. Teach Your Bird to Talk. </p>
+ 				<p> 5. "Potty-Train" Your Bird. </p>
+ 				<p> 6. Going outside and travel. </p>
+ 				<p> 7. Create Your Own Bird Tricks with Clicker Training. </p>
+ 				
+ 			</fieldset><br/>
+ 		
+ 		<fieldset class = "fieldset">
+ 			<legend class = "legend"> Essential tips for pet training </legend>
+ 				
+ 				<p> Schedule play time even when you are busy. </p>
+ 				<p> Choose an appropriate training space. </p>
+ 				<p> Select some upbeat music. </p>
+ 				<p> Set an example for your bird. </p>
+ 				<p> Try using visual aids. </p>
+ 				<p> Reward your bird's progress. </p>
+
+ 		</fieldset><br/>
+ 		
+ 	</form>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

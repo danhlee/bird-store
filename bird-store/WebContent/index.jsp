@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Gaegu"> 
 	<title>Jack's Sparrow Aviary</title>
 	
 	
@@ -63,6 +64,8 @@
 		  </a>
 		</div>
 		
+		<hr/>
+		
 		<div class="center">
 			<p class="info-pane">Information</p>
 		</div>
@@ -81,7 +84,10 @@
 		
 		    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 		      <div class="card-body">
-		        We have a wide variety of bird products.
+		        <p class="mainPageText">Select from our wide variety of bird products! From bird baths to feed and toys, Jack's Sparrow Aviary has got you covered!</p><br/>
+		        <img class="mainPageImage" src="images/product1.jpg" alt="bird bath">
+		        <img class="mainPageImage" src="images/product2.jpg" alt="bird toy">
+		        <img class="mainPageImage" src="images/product3.jpg" alt="bird feeder">
 		      </div>
 		    </div>
 		  </div>
@@ -95,7 +101,10 @@
 		    </div>
 		    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 		      <div class="card-body">
-		        Bring your bird in for one of our legendary bird services.
+		        <p class="mainPageText">Bring your bird in for one of our legendary bird services! We offer wing clippings, cleanings, and general health checkups!</p><br/>
+		        <img class="mainPageImage" src="images/service1.jpg" alt="bird getting wings clipped">
+		        <img class="mainPageImage" src="images/service2.gif" alt="bird getting brushed">
+		        <img class="mainPageImage" src="images/service3.jpg" alt="doctor holding bird">
 		      </div>
 		    </div>
 		  </div>
@@ -109,7 +118,10 @@
 		    </div>
 		    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 		      <div class="card-body">
-		        Take part in our monthly bird and owner training events.
+		        <p class="mainPageText">Take part in our monthly bird and owner training events!</p>
+		        <img class="mainPageImage" src="images/event1.jpg" alt="girl with bird">
+		        <img class="mainPageImage" src="images/event2.jpg" alt="hand feeding bird">
+		        <img class="mainPageImage" src="images/event3.jpg" alt="bird training">
 		      </div>
 		    </div>
 		  </div>
@@ -153,7 +165,7 @@
 							 			not the bare minimum, which seems to be a trend in some stores now days. 
 										</p>
 											
-								</fieldset><br/>
+								</fieldset>
 							<fieldset class = "fieldset">
 								<legend class = "legend"> History </legend>
 									
@@ -166,7 +178,7 @@
 										
 									</p>
 									
-							</fieldset><br/>
+							</fieldset>
 							
 							<fieldset class = "fieldset">
 							 	<legend class = "legend"> Mission </legend>
@@ -176,10 +188,7 @@
 								 		can to make the experience of owning a bird, a good experience. 
 							 		</p>
 							 				
-							 </fieldset><br/>
-					        
-					        
-					        
+							 </fieldset>
 					        
 					      </div>
 					      <div class="modal-footer">
