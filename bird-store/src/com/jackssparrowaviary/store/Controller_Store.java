@@ -126,7 +126,15 @@ public class Controller_Store extends HttpServlet {
 		session.setAttribute("shopping_cart", shoppingCart);
 		session.setMaxInactiveInterval(60*60*24);
 		
-		listProductsByName(request, response);
+		String myCommand = request.getParameter("command");
+		
+		if (myCommand == "LIST_BY_NAME") {
+			listProductsByName(request, response);
+		}
+		else {
+			listProductsByPrice(request, response);
+		}
+		
 	}
 
 
@@ -140,6 +148,7 @@ public class Controller_Store extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/products_page.jsp");
 		dispatcher.forward(request, response);
 	}
+	
 	private void listProductsByPrice(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Product> productList = productDao.getProductsByPrice();
 		

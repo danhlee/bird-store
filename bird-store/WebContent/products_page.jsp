@@ -12,9 +12,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css">
 	<title>Jack's Sparrow Aviary</title>
-	
 
-	
 </head>
 <body>
 	<!-- Navbar -->
@@ -43,8 +41,8 @@
 			<table class="table">
 			    <thead>
 					<tr>
-					  <th>Product Name</th>
-					  <th>Price</th>
+					  <th><a href="./Controller_Store">Product Name</a></th>
+					  <th><a href="./Controller_Store?command=LIST_BY_PRICE">Price</a></th>
 					  <th>Quantity Remaining</th>
 					  <th>Add to Cart</th>
 					</tr>
