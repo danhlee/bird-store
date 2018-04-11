@@ -22,3 +22,41 @@
 	border-bottom: 1px solid #333333; 
 	border-left: 1px solid #CCCCCC;
 }
+
+.hours {
+	margin: 10px;
+	padding: 10px;
+}
+
+.content {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+		
+.fa {
+  	padding: 20px;
+  	font-size: 30px;
+  	width: 50px;
+  	text-align: center;
+  	text-decoration: none;
+  	margin: 5px 2px;
+}
+ 
+.fa-facebook {
+ 	background: #3B5998;
+ 	color: white;
+}
+
+.fieldset {
+	font-weight: italic;
+	text-align: left;
+	border: 0px solid black;
+	border-radius: 30px;
+	background-color: beige;
+	box-shadow: 10px 5px 20px dimgray;
+}
+
+.legend {
+	font-weight: bold;
+}	  

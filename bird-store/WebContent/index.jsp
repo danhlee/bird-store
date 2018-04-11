@@ -125,8 +125,69 @@
 	            <!-- About Us -->
 	            <div class="col-md-2 mb-3">
 	                <h6 class="text-uppercase font-weight-bold">
-	                    <a href="about_us_page.jsp">About us</a>
+	                    <a data-toggle="modal" href="#AboutUsModal">About us</a>
 	                </h6>
+                    <!-- About Us modal -->
+                    <div class="modal fade" id="AboutUsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="AboutUs-modal">About Us</h5>
+					        
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      
+					      <div class="modal-body">
+							<fieldset class = "fieldset">
+									<legend class = "legend"> Who we are </legend>
+											
+										<p> 
+							 			Jack Sparrow Aviary Shop is a specialized store for all kind of birds. Our goal is to provide service 
+							 			to our customers and do the best we can to make the experience of owning a pet, a good experience.
+							 			Our employees are specialize in all kinds of birds and we feel it's our obligation to pass that knowledge along. 
+							 			The care of our birds is our priority.  When you visit us you will get the supplies you need and the 
+							 			information to keep your pet happy and healthy. We don't believe in cutting corners when it comes to 
+							 			your pets welfare, so you can be assured when you come to us for help, we will provide you with what you need, 
+							 			not the bare minimum, which seems to be a trend in some stores now days. 
+										</p>
+											
+								</fieldset><br/>
+							<fieldset class = "fieldset">
+								<legend class = "legend"> History </legend>
+									
+									<p> 
+										Jack Sparrow Aviary Shop opened in March of 2018.  Over those days we have expanded twice, 
+										those expansions can be seen by the services provided. The store was full of friends and family 
+										who helped and supported us along the way volunteering their time to help us get started. 
+										We still are a family owned and operated store ,and strives to provide good customer service, 
+										good products and healthy locally-bred animals. 
+										
+									</p>
+									
+							</fieldset><br/>
+							
+							<fieldset class = "fieldset">
+							 	<legend class = "legend"> Mission </legend>
+							 				
+							 		<p> 
+								 		Our goal is to provide service to our customers and do the best we 
+								 		can to make the experience of owning a bird, a good experience. 
+							 		</p>
+							 				
+							 </fieldset><br/>
+					        
+					        
+					        
+					        
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 	            </div>
 
 				<!-- Location -->
@@ -161,8 +222,43 @@
 				<!-- Contact -->
 	            <div class="col-md-2 mb-3">
 	                <h6 class="text-uppercase font-weight-bold">
-	                    <a href="contact.jsp">Contact</a>
+	                    <a data-toggle="modal" href="#contactModal">Contact</a>
 	                </h6>
+	                <!-- Contact modal -->
+                    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="contact-modal">Contact</h5>
+					        
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      
+					      <div class="modal-body">
+					        <a href="mailto:info@jacksparrowaviary.com">info@jacksparrowaviary.com</a><br/>
+					        <p>777-777-7777</p>
+							<h4>Our team is available:</h4>
+							<div class="hours">
+								<p>
+									Monday-Friday: 8 am - 6 pm <br/>
+									Saturday: 8 am - 4 pm <br/>
+									Sunday: CLOSED
+								</p>
+							</div>
+							
+
+							<div>
+								<a href="https://www.facebook.com" class="fa fa-facebook">Follow Us on Facebook</a>
+							</div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 	            </div>
 	        </div>
 
