@@ -52,6 +52,16 @@ public class Product {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		boolean isEqual = false;
+		
+		if (obj instanceof Product) {
+			isEqual = this.id == ((Product) obj).getId();
+		}
+		
+		return isEqual;
+	}
+	@Override
 	public String toString() {
 		return "Product [id=" + id + ", productName=" + productName + ", price=" + price + ", quantity=" + quantity
 				+ "]";

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="com.jackssparrowaviary.store.Controller_Store"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -12,11 +12,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css">
 	<title>Jack's Sparrow Aviary</title>
+	
 
 	
 </head>
 <body>
-	
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	  <a class="navbar-brand" href="#">Jack's Sparrow Aviary</a>
@@ -34,50 +34,49 @@
 	  </div>
 	</nav>
 	<br/><br/><br/>
-	
-	
-	<a id="controllerLoader" href="./Controller_Store">Call MyServlet</a>
+
 	
 	<div class="container">
-	  <h2>Products List</h2>
-	  <form action="./Controller_Store">         
-		  <table class="table">
-		    <thead>
-		      <tr>
-		        <th>Product Name</th>
-		        <th>Price</th>
-		        <th>Quantity Remaining</th>
-		        <th>Add to Cart</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		      <tr>
-		      	<c:forEach var="tempProduct" items="${product_list}">
-		        
-				 	<!-- set up add to cart update link for each student -->
-				 	<c:url var="tempLink" value="Controller_Store">
-				 		<c:param name="command" value="ADD_TO_CART" />
-				 		<c:param name="product_id" value="${tempProduct.id}" />
-				 		<c:param name="product_name" value="${tempProduct.productName}" />
-				 		<c:param name="product_price" value="${tempProduct.price}" />
-				 		<c:param name="product_quantity" value="${tempProduct.quantity}" />
-				 	</c:url>
-				 	
-				 	<tr>
-				 		<td> ${tempProduct.productName} </td>
-				 		<td> ${tempProduct.price} </td>
-				 		<td> ${tempProduct.quantity} </td>
-				 		<td>
-				 			<input type="submit" value="Add to cart">
-				 			<a href="${tempLink}">Add</a>
-			 			</td>
-				 	</tr>
-				 </c:forEach>
-		      </tr>
-		    </tbody>
-		  </table>
-		  <input type="submit" value="Checkout">
-	  </form>
+		<h2>Products List</h2>
+		<form action="Controller_Store" method="GET">
+			<input type="hidden" name="command" value="CHECKOUT" />   
+			<table class="table">
+			    <thead>
+					<tr>
+					  <th>Product Name</th>
+					  <th>Price</th>
+					  <th>Quantity Remaining</th>
+					  <th>Add to Cart</th>
+					</tr>
+			    </thead>
+				<tbody>
+					<c:forEach var="tempProduct" items="${product_list}">
+						<!-- set up add to cart update link for each student -->
+						<c:url var="tempLink" value="Controller_Store">
+							<c:param name="command" value="ADD_TO_CART" />
+							<c:param name="product_id" value="${tempProduct.id}" />
+							<c:param name="product_name" value="${tempProduct.productName}" />
+							<c:param name="product_price" value="${tempProduct.price}" />
+							<c:param name="product_quantity" value="${tempProduct.quantity}" />
+						</c:url>
+				
+						<tr>
+							<td> ${tempProduct.productName} </td>
+							<td> ${tempProduct.price} </td>
+							<td> ${tempProduct.quantity} </td>
+							<td>
+								<a class="cart_button" href="${tempLink}">Add to cart</a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<input type="submit" value="Checkout">
+		</form>
 	</div>
+	<br/><br/><br/><br/><br/><br/>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.jackssparrowaviary.store;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -56,6 +57,12 @@ public class Controller_Store extends HttpServlet {
 			case "ADD_TO_CART":
 				addToCart(request, response);
 				break;
+			case "CHECKOUT":
+				checkout(request, response);
+				break;
+			case "REMOVE_FROM_CART":
+				removeFromCart(request, response);
+				break;
 			default:
 				listProductsByName(request, response);
 			}
@@ -66,34 +73,60 @@ public class Controller_Store extends HttpServlet {
 	}
 
 
-	private void addToCart(HttpServletRequest request, HttpServletResponse response) {
-		// check to see if cart already exists
-		Cart shoppingCart;
+	@SuppressWarnings("unchecked")
+	private void removeFromCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer productId = Integer.parseInt(request.getParameter("product_id"));
 		String productName = request.getParameter("product_name");
 		Double productPrice = Double.parseDouble(request.getParameter("product_price"));
 		Integer productQuantity = Integer.parseInt(request.getParameter("product_quantity"));
 		Product tempProduct = new Product(productId, productName, productPrice, productQuantity);
+		
+		List<Product> shoppingCart;
+		
+		HttpSession session = request.getSession();
+		shoppingCart = (ArrayList<Product>) session.getAttribute("shopping_cart");
+		
+		shoppingCart.remove(tempProduct);
+
+		// get dispatcher and set destination to checkout page
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/checkout_page.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// get dispatcher and set destination to checkout page
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/checkout_page.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void addToCart(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// check to see if cart already exists
+		List<Product> shoppingCart;
+		Integer productId = Integer.parseInt(request.getParameter("product_id"));
+		String productName = request.getParameter("product_name");
+		Double productPrice = Double.parseDouble(request.getParameter("product_price"));
+		Integer productQuantity = Integer.parseInt(request.getParameter("product_quantity"));
+		
+		Product tempProduct = new Product(productId, productName, productPrice, productQuantity);
 		// TODO purchase quantity
 		// int purchaseQuantity = 1;
 		
-		HttpSession session = request.getSession();
-	
-		shoppingCart = (Cart) session.getAttribute("shopping_cart");
+		HttpSession session = request.getSession(true);
+		shoppingCart = (ArrayList<Product>) session.getAttribute("shopping_cart");
 		
-		
-		if(shoppingCart == null) {
-			// create a cart object, that contains a HashMap as a data field
-			shoppingCart = new Cart();
-			session.setAttribute("shopping_cart", shoppingCart.getCartItems());
-			session.setMaxInactiveInterval(60*60);
+		if( shoppingCart == null ) {
+			shoppingCart = new ArrayList<Product>();
 		}
-		
+
 		// add item to session object
-		shoppingCart.addToCart(tempProduct);
+		shoppingCart.add(tempProduct);
 		
-		session.setAttribute("shopping_cart", shoppingCart.getCartItems());
+		session.setAttribute("shopping_cart", shoppingCart);
+		session.setMaxInactiveInterval(60*60*24);
 		
+		listProductsByName(request, response);
 	}
 
 

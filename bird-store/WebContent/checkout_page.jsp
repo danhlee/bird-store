@@ -2,7 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -10,8 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css">
+	<title>Jack's Sparrow Aviary</title>
 	
-	<title>My Shopping Cart</title>
+
+	
 </head>
 <body>
 	<!-- Navbar -->
@@ -22,8 +25,8 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav">
-	      <a class="nav-item nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
-	      <a class="nav-item nav-link" href="./Controller_Store">Products</a>
+	      <a class="nav-item nav-link" href="index.jsp">Home </a>
+	      <a class="nav-item nav-link" href="./Controller_Store">Products<span class="sr-only">(current)</span></a>
 	      <a class="nav-item nav-link" href="services_page.jsp">Services</a>
 	      <a class="nav-item nav-link" href="events_page.jsp">Events</a>
 	      <a class="nav-item nav-link active" href="checkout_page.jsp">Cart</a>
@@ -31,27 +34,45 @@
 	  </div>
 	</nav>
 	<br/><br/><br/>
-	<table class="table">
-	    <thead>
-	      <tr>
-	        <th>Product Name</th>
-	        <th>Price</th>
-	        <th>Quantity</th>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <tr>
-	        <c:forEach var="cartItem" items="${sessionScope.shopping_cart}">
-	       
-		 	
-		 	<tr>
-		 		<td> ${cartItem.name} </td>
-		 		<td> ${cartItem.price} </td>
-		 		<td> 1 </td>
-		 	</tr>
-		 </c:forEach>
-	     </tr>
-	    </tbody>
-	 </table>
+	
+	<div class="container">
+		<h2>Shopping Cart</h2>
+		<form action="Controller_Store" method="GET">
+			<input type="hidden" name="command" value="PURCHASE" />   
+			<table class="table">
+			    <thead>
+					<tr>
+					  <th>Product Name</th>
+					  <th>Price</th>
+					  <th>Remove from cart</th>
+					</tr>
+			    </thead>
+				<tbody>
+					<c:forEach var="tempCartItem" items="${sessionScope.shopping_cart}">
+						<!-- set up add to cart update link for each student -->
+						<c:url var="tempLink" value="Controller_Store">
+							<c:param name="command" value="REMOVE_FROM_CART" />
+							<c:param name="product_id" value="${tempCartItem.id}" />
+							<c:param name="product_name" value="${tempCartItem.productName}" />
+							<c:param name="product_price" value="${tempCartItem.price}" />
+							<c:param name="product_quantity" value="${tempCartItem.quantity}" />
+						</c:url>
+				
+						<tr>
+							<td> ${tempCartItem.productName} </td>
+							<td> ${tempCartItem.price} </td>
+							<td>
+								<a class="cart_button" href="${tempLink}">Remove from cart</a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<input type="submit" value="Purchase">
+		</form>
+	</div>
+	<br/><br/><br/><br/><br/><br/>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
-</html>

@@ -7,7 +7,7 @@ public class Cart {
 	List<Product> cartItems;
 	
 	public Cart() {
-		this.cartItems = new ArrayList<>();
+		this.cartItems = new ArrayList<Product>();
 	}
 	
 	public Cart(List<Product> cartItems) {
