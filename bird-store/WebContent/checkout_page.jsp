@@ -23,7 +23,7 @@
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav">
 	      <a class="nav-item nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
-	      <a class="nav-item nav-link" href="products_page.jsp">Products</a>
+	      <a class="nav-item nav-link" href="./Controller_Store">Products</a>
 	      <a class="nav-item nav-link" href="services_page.jsp">Services</a>
 	      <a class="nav-item nav-link" href="events_page.jsp">Events</a>
 	      <a class="nav-item nav-link active" href="checkout_page.jsp">Cart</a>

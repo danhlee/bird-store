@@ -12,10 +12,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/styles.css">
 	<title>Jack's Sparrow Aviary</title>
+
 	
 </head>
 <body>
-	<jsp:forward page="Controller_Store?method=GET" ></jsp:forward>
+	
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	  <a class="navbar-brand" href="#">Jack's Sparrow Aviary</a>
@@ -25,7 +26,7 @@
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav">
 	      <a class="nav-item nav-link" href="index.jsp">Home </a>
-	      <a class="nav-item nav-link active" href="products_page.jsp">Products<span class="sr-only">(current)</span></a>
+	      <a class="nav-item nav-link active" href="./Controller_Store">Products<span class="sr-only">(current)</span></a>
 	      <a class="nav-item nav-link" href="services_page.jsp">Services</a>
 	      <a class="nav-item nav-link" href="events_page.jsp">Events</a>
 	      <a class="nav-item nav-link" href="checkout_page.jsp">Cart</a>
@@ -35,7 +36,7 @@
 	<br/><br/><br/>
 	
 	
-	<a href="./Controller_Store">Call MyServlet</a>
+	<a id="controllerLoader" href="./Controller_Store">Call MyServlet</a>
 	
 	<div class="container">
 	  <h2>Products List</h2>
