@@ -71,9 +71,6 @@ public class Controller_Store extends HttpServlet {
 			case "REMOVE_FROM_CART":
 				removeFromCart(request, response);
 				break;
-			case "PURCHASE":
-				purchase(request, response);
-				break;
 			case "LIST_REGISTERED":
 				listRegisteredByEventName(request, response);
 				break;
@@ -107,42 +104,6 @@ public class Controller_Store extends HttpServlet {
 		// get dispatcher from request object and specify destination page
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/registration_confirmation_page.jsp");
 		dispatcher.forward(request, response);
-		
-	}
-
-	@SuppressWarnings("unchecked")
-	private void purchase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		List<Product> shoppingCart;
-		
-		HttpSession session = request.getSession();
-		shoppingCart = (ArrayList<Product>) session.getAttribute("shopping_cart");
-		
-		// if shopping cart is null or empty
-		if (shoppingCart == null || shoppingCart.size() == 0) {
-			// get dispatcher and set destination to checkout page
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/purchase_fail_page.jsp");
-			dispatcher.forward(request, response);
-		}
-		// if cart isn't empty
-		else {
-			ListIterator<Product> iterator = shoppingCart.listIterator();
-			Product tempProduct;
-			
-			while (iterator.hasNext()) {
-				tempProduct = iterator.next();
-				productDao.updateQuantity(tempProduct);
-				iterator.remove();
-			}
-			
-			
-			session.setAttribute("shopping_cart", shoppingCart);
-			request.setAttribute("confirmation_number", UUID.randomUUID());
-			// get dispatcher and set destination to checkout page
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/confirmation_page.jsp");
-			dispatcher.forward(request, response);
-			
-		}
-		
 		
 	}
 
@@ -248,6 +209,9 @@ public class Controller_Store extends HttpServlet {
 			case "REGISTER":
 				register(request, response);
 				break;
+			case "PURCHASE":
+				purchase(request, response);
+				break;
 			default:
 				register(request, response);
 			}
@@ -285,6 +249,125 @@ public class Controller_Store extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("registration_confirmation_page.jsp");
 		dispatcher.forward(request, response);
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	private void purchase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		List<Product> shoppingCart;
+		HttpSession session = request.getSession();
+		shoppingCart = (ArrayList<Product>) session.getAttribute("shopping_cart");
+		String failMsg = "Purchase Failed!";
+		
+		// if shopping cart is null or empty
+		if (shoppingCart == null || shoppingCart.size() == 0) {
+			// get dispatcher and set destination to checkout page
+			failMsg = "Purchase Failed! Your cart is empty!";
+			request.setAttribute("failure_msg", failMsg);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/purchase_fail_page.jsp");
+			dispatcher.forward(request, response);
+		}
+		// if cart isn't empty
+		else {
+			// validate payment info
+			String firstName = request.getParameter("payment_first_name");
+			String lastName = request.getParameter("payment_last_name");
+			String cardNumber = request.getParameter("card_number");
+			String cvv = request.getParameter("cvv");
+			
+			// validate card number and cvv with custom methods
+			boolean cardNumberValid = validateCardNumber(cardNumber);
+			boolean cvvValid = validateCvv(cvv);
+			
+			// TODO validate names with .matches(regex)
+			boolean firstNameValid = firstName.matches("^[a-zA-Z]$");
+			boolean lastNameValid = lastName.matches("^[a-zA-Z]$");
+			
+			
+			// if some payment field is invalid send to failure page with failMsg
+			if (!cardNumberValid) {
+				failMsg += "\nCredit card number is invalid!";
+			}
+			if (!cvvValid) {
+				failMsg += "\nCVV number is invalid!";
+			}
+			if (!firstNameValid) {
+				failMsg += "\nFirst name is invalid!";
+			}
+			if (!lastNameValid) {
+				failMsg += "\nLast name is invalid!";
+			}
+			
+			// if any validation failed, send to fail page
+			if (!cardNumberValid || !cvvValid || !firstNameValid || !lastNameValid) {
+				request.setAttribute("failure_msg", failMsg);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/purchase_fail_page.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+			// create iterator to go through shopping cart
+			ListIterator<Product> iterator = shoppingCart.listIterator();
+			Product tempProduct;
+			
+			// decrement inventory count and remove objects from shopping cart
+			while (iterator.hasNext()) {
+				tempProduct = iterator.next();
+				productDao.updateQuantity(tempProduct);
+				iterator.remove();
+			}
+			
+			// set the now emptied shopping cart in the session object
+			session.setAttribute("shopping_cart", shoppingCart);
+			request.setAttribute("confirmation_number", UUID.randomUUID());
+			
+			// get dispatcher and set destination to checkout page
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/confirmation_page.jsp");
+			dispatcher.forward(request, response);
+			
+		}
+	}
+	
+	private boolean validateCardNumber(String cardNumber) {
+		@SuppressWarnings("unused")
+		int tempCardNumber;
+		boolean isValid = false;
+		
+		try {
+			// check to see if cardNumber meets length requirement
+			if (cardNumber.length() < 8 || cardNumber.length() > 19) {
+				return false;
+			}
+			
+			
+			// check to see if cardNumber is an integer
+			tempCardNumber = Integer.parseInt(cardNumber);
+			isValid = true;
+		}
+		catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		return isValid;
+	}
+	
+	private boolean validateCvv(String cvv) {
+		@SuppressWarnings("unused")
+		int tempCvv;
+		boolean isValid = false;
+		
+		try {
+			// check to see if cardNumber meets length requirement
+			if (cvv.length() != 3) {
+				return false;
+			}
+			// check to see if cardNumber is an integer
+			tempCvv = Integer.parseInt(cvv);
+			isValid = true;
+		}
+		catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		return isValid;
 	}
 
 }

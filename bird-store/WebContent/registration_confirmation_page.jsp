@@ -82,7 +82,9 @@
 		</table>
 		
 		
-		</br></br></hr>
+		<br />
+		<br />
+		
 		<table class="table">
 		    <thead>
 				<tr>

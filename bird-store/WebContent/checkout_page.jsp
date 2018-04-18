@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="css/styles.css">
 	<title>Jack's Sparrow Aviary</title>
 	
+	<script src="validation.jsp"></script>
 
 	
 </head>
@@ -37,7 +38,7 @@
 	
 	<div class="container">
 		<h2>Shopping Cart</h2>
-		<form action="Controller_Store" method="GET">
+		<form action="Controller_Store" method="POST" >
 			<input type="hidden" name="command" value="PURCHASE" />   
 			<table class="table">
 			    <thead>
@@ -71,20 +72,34 @@
 			
 			<!-- Payment Info -->
 			<div class="payment-name">
-                <label for="paymentName">Name</label>
-                <input type="text" class="form-control" id="paymentName">
+                <label>First Name</label>
+                <input type="text" pattern="^[A-Za-z]+$" class="form-control" name="payment_first_name" placeholder="letters only" required>
+
+                <label>Last Name</label>
+                <input type="text" pattern="^[A-Za-z]+$" class="form-control" name="payment_last_name" placeholder="letters only" required>
             </div>
+            <br/>
+            <!-- Credit card number can be between 8-19 digits -->
+            <div class="card-type">
+                <label>Card Type</label>
+                <select name="cardType">
+                    <option value="Visa">Visa</option>
+                    <option value="Mastercard">Mastercard</option>
+            	</select>
+            </div>
+            <div class="payment-number">
+                <label>Card Number</label>
+                <input type="text" pattern="^[0-9]{8,19}$" class="form-control" name="card_number"  placeholder="8 to 19 digits" required>
+            </div>
+            
             <div class="payment-number">
                 <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv">
+                <input type="text" pattern="^[0-9]{3}$" class="form-control" name="cvv" placeholder="3 digits"required>
             </div>
-            <div class="payment-number">
-                <label for="cardNumber">Card Number</label>
-                <input type="text" class="form-control" id="cardNumber">
-            </div>
-            <div class="payment-expiration" id="expirationDate">
+            <br/>
+            <div class="payment-expiration">
                 <label>Expiration Date</label>
-                <select>
+                <select name="expDateMonth">
                     <option value="01">January</option>
                     <option value="02">February </option>
                     <option value="03">March</option>
@@ -98,20 +113,20 @@
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
-                <select>
-                    <option value="18"> 2018</option>
-                    <option value="19"> 2019</option>
-                    <option value="20"> 2020</option>
-                    <option value="21"> 2021</option>
-                    <option value="22"> 2022</option>
-                    <option value="23"> 2023</option>
-                    <option value="24"> 2024</option>
-                    <option value="25"> 2025</option>
-                    <option value="26"> 2026</option>
+                <select name="expDateYear">
+                    <option value="2018"> 2018</option>
+                    <option value="2019"> 2019</option>
+                    <option value="2020"> 2020</option>
+                    <option value="2021"> 2021</option>
+                    <option value="2022"> 2022</option>
+                    <option value="2023"> 2023</option>
+                    <option value="2024"> 2024</option>
+                    <option value="2025"> 2025</option>
+                    <option value="2026"> 2026</option>
                 </select>
             </div>
-
-			<input type="submit" value="Purchase">
+			<br/>
+			<input type="submit" value="Purchase" >
 		</form>
 	</div>
 	<br/><br/><br/><br/><br/><br/>
