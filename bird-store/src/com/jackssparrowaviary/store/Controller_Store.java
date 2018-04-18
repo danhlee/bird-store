@@ -25,6 +25,8 @@ public class Controller_Store extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ProductDao productDao;
     private RegistrationDao registrationDao;
+    private EventDao eventDao;
+    
     
     // initialize datasource
     @Resource(name="jdbc/bird_store")
@@ -37,6 +39,7 @@ public class Controller_Store extends HttpServlet {
     	try {
     		productDao = new ProductDao(dataSource);
     		registrationDao = new RegistrationDao(dataSource);
+    		eventDao = new EventDao(dataSource);
     	}
     	catch (Exception e) {
     		throw new ServletException(e);
@@ -96,8 +99,10 @@ public class Controller_Store extends HttpServlet {
 		}
 		
 		
+		// use EventDao to call method that selects count for each event
 		
-		
+		List<Event> eventCountList = eventDao.getEventCount();
+		request.setAttribute("event_count_list", eventCountList);
 		
 		// get dispatcher from request object and specify destination page
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/registration_confirmation_page.jsp");
@@ -271,11 +276,12 @@ public class Controller_Store extends HttpServlet {
 			request.setAttribute("registration_message", msg);
 		}
 		else {
-			String msg = "Registration failed! Make sure you select and event and do not leave the email field blank!";
+			String msg = "Registration failed! Make sure you select an event and do not leave the email field blank!";
 			request.setAttribute("registration_message", msg);
 		}
 		
-		// TODO do i need "/" in front of URL for getRequestDispatcher(String url)
+		// do i need "/" in front of URL for getRequestDispatcher(String url)
+		// Answer: No, you don't need the /
 		RequestDispatcher dispatcher = request.getRequestDispatcher("registration_confirmation_page.jsp");
 		dispatcher.forward(request, response);
 		

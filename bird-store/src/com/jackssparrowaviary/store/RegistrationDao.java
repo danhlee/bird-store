@@ -81,7 +81,7 @@ public class RegistrationDao {
 				int id = myResultSet.getInt("id");
 				String email = myResultSet.getString("email");
 				String eventName = myResultSet.getString("event_name");
-				String registrationDate = myResultSet.getString("registration_date");
+				String registrationDate = myResultSet.getString("registration_date").substring(0, 11);
 				
 				Registration tempRegistration = new Registration(id, email, eventName, registrationDate);
 				

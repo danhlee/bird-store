@@ -39,8 +39,18 @@
 	  </div>
 	</nav>
 	<br/><br/><br/>
-	<h1 class="confirmation-header"><%= request.getAttribute("registration_message")%></h1>
 	
+	<!-- Confirmation Message -->
+	<h1 class="confirmation-header">
+		<%
+			String msg = (String)request.getAttribute("registration_message"); 
+			if (msg != null) {
+				out.print(msg);
+			}
+		%>
+	</h1>
+	
+	<!-- Form to list attendees by event -->
 	<div class="container">
 		<form action="./Controller_Store" method="GET">
 			<input type="hidden" name="command" value="LIST_REGISTERED">
@@ -72,7 +82,7 @@
 		</table>
 		
 		
-		<!--  
+		</br></br></hr>
 		<table class="table">
 		    <thead>
 				<tr>
@@ -81,16 +91,15 @@
 				</tr>
 		    </thead>
 			<tbody>
-				<c:forEach var="tempEvent" items="${total_registration_list}">				
+				<c:forEach var="tempEvent" items="${event_count_list}">				
 					<tr>
-						<td> ${tempRegistration.email} </td>
-						<td> ${tempRegistration.eventName} </td>
-						<td> ${tempRegistration.registrationDate} </td>
+						<td> ${tempEvent.eventName} </td>
+						<td> ${tempEvent.count} </td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		-->
+		
 		
 	</div>
 	
