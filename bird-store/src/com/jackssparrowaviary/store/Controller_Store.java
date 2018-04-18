@@ -24,6 +24,7 @@ import javax.sql.DataSource;
 public class Controller_Store extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ProductDao productDao;
+    private RegistrationDao registrationDao;
     
     // initialize datasource
     @Resource(name="jdbc/bird_store")
@@ -35,6 +36,7 @@ public class Controller_Store extends HttpServlet {
     	
     	try {
     		productDao = new ProductDao(dataSource);
+    		registrationDao = new RegistrationDao(dataSource);
     	}
     	catch (Exception e) {
     		throw new ServletException(e);
@@ -69,6 +71,9 @@ public class Controller_Store extends HttpServlet {
 			case "PURCHASE":
 				purchase(request, response);
 				break;
+			case "LIST_REGISTERED":
+				listRegisteredByEventName(request, response);
+				break;
 			default:
 				listProductsByName(request, response);
 			}
@@ -78,6 +83,27 @@ public class Controller_Store extends HttpServlet {
 		}
 	}
 
+
+
+
+	private void listRegisteredByEventName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		String eventName = request.getParameter("event_name");
+		
+		if (eventName != null) {
+			List<Registration> eventList = registrationDao.getRegisteredByEventName(eventName);
+			// set a key value pair in request object's list
+			request.setAttribute("event_list", eventList);
+		}
+		
+		
+		
+		
+		
+		// get dispatcher from request object and specify destination page
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/registration_confirmation_page.jsp");
+		dispatcher.forward(request, response);
+		
+	}
 
 	@SuppressWarnings("unchecked")
 	private void purchase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -206,8 +232,53 @@ public class Controller_Store extends HttpServlet {
 	
 	// doPost
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			String myCommand = request.getParameter("command");
+			
+			if (myCommand == null) {
+				myCommand = "REGISTER";
+			}
+			
+			switch (myCommand) {
+			case "REGISTER":
+				register(request, response);
+				break;
+			default:
+				register(request, response);
+			}
+		}
+		catch (Exception e) {
+			throw new ServletException(e);
+		}
+	}
+	
+	private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		// create a registration object
+		String email = request.getParameter("email");
+		String eventName = request.getParameter("event_name");
+		boolean registrationSuccessful = false;
+		
+		// null check on variables
+		if (email != null || eventName != null) {
+			if (!email.equals("") && email.matches("^.+\\@[a-zA-Z]+\\.[a-zA-Z]+$")) {
+				Registration newRegistration = new Registration(email, eventName);
+				registrationSuccessful = registrationDao.postNewRegistration(newRegistration);
+			}
+		}
+		
+		if (registrationSuccessful) {
+			String msg = "You have successfully registered for " + eventName;
+			request.setAttribute("registration_message", msg);
+		}
+		else {
+			String msg = "Registration failed! Make sure you select and event and do not leave the email field blank!";
+			request.setAttribute("registration_message", msg);
+		}
+		
+		// TODO do i need "/" in front of URL for getRequestDispatcher(String url)
+		RequestDispatcher dispatcher = request.getRequestDispatcher("registration_confirmation_page.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 }

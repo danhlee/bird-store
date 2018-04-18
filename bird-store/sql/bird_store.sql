@@ -48,7 +48,27 @@ SELECT * FROM product ORDER BY product_name;
     
     
     
+DROP TABLE IF EXISTS `event`;
+
+CREATE TABLE `event` (
+	id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    email varchar(100) DEFAULT NULL,
+    event_name varchar(100) DEFAULT NULL,
+    registration_date timestamp
+) ENGINE=InnoDB AUTO_INCREMENT=1;
+   
     
+INSERT INTO `event`(email, event_name) VALUES 
+	('birdlover@gmail.com', 'Taking Flight: Bringing in the Bird Skills'),
+    ('carlossantana@hotmail.com', 'Birds of Prey Series: Sparrows'),
+	('homersimpson123@gmail.com', 'Sagawau Bird Hikes'),
+    ('eagleman44@gmail.com', 'Sparrow Woods Bird Walk'),
+    ('parrotgirl@gmail.com', 'Taking Flight: Bringing in the Bird Skills');
+    
+SELECT * FROM `event` ORDER BY event_name;
+
+
+SELECT event_name, count(*) FROM `event` GROUP BY event_name;
     
     
     
