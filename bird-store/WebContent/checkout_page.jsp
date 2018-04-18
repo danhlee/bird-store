@@ -73,10 +73,10 @@
 			<!-- Payment Info -->
 			<div class="payment-name">
                 <label>First Name</label>
-                <input type="text"  class="form-control" name="payment_first_name" placeholder="letters only" required>
+                <input type="text" pattern="^[A-Za-z]+$" class="form-control" name="payment_first_name" placeholder="letters only" required>
 
                 <label>Last Name</label>
-                <input type="text"  class="form-control" name="payment_last_name" placeholder="letters only" required>
+                <input type="text" pattern="^[A-Za-z]+$" class="form-control" name="payment_last_name" placeholder="letters only" required>
             </div>
             <br/>
             <!-- Credit card number can be between 8-19 digits -->
@@ -89,12 +89,12 @@
             </div>
             <div class="payment-number">
                 <label>Card Number</label>
-                <input type="text"  class="form-control" name="card_number"  placeholder="8 to 19 digits" required>
+                <input type="text" pattern="^[0-9]{8,19}$" class="form-control" name="card_number"  placeholder="8 to 19 digits" required>
             </div>
             
             <div class="payment-number">
                 <label for="cvv">CVV</label>
-                <input type="text"  class="form-control" name="cvv" placeholder="3 digits"required>
+                <input type="text" pattern="^[0-9]{3}$" class="form-control" name="cvv" placeholder="3 digits"required>
             </div>
             <br/>
             <div class="payment-expiration">

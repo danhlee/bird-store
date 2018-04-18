@@ -278,13 +278,10 @@ public class Controller_Store extends HttpServlet {
 			boolean cardNumberValid = validateCardNumber(cardNumber);
 			boolean cvvValid = validateCvv(cvv);
 			
-			// TODO validate names with .matches(regex)
-			System.out.println(firstName);
-			System.out.println(lastName);
+			// validate names with .matches(regex)
 			boolean firstNameValid = firstName.matches("^[a-zA-Z]+$");
 			boolean lastNameValid = lastName.matches("^[a-zA-Z]+$");
-			System.out.println(firstNameValid);
-			System.out.println(lastNameValid);
+
 			
 			// if some payment field is invalid send to failure page with failMsg
 			if (!firstNameValid) {
