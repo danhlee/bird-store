@@ -77,3 +77,7 @@
 #p1 {
 	font-family: 'Gaegu', cursive;
 }
+
+#confirmation_msg, #failure_msg {
+	font-family: 'Gaegu', cursive;
+}

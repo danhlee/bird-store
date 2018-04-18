@@ -261,7 +261,7 @@ public class Controller_Store extends HttpServlet {
 		// if shopping cart is null or empty
 		if (shoppingCart == null || shoppingCart.size() == 0) {
 			// get dispatcher and set destination to checkout page
-			failMsg = "Purchase Failed! Your cart is empty!";
+			failMsg += " Your cart is empty!";
 			request.setAttribute("failure_msg", failMsg);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/purchase_fail_page.jsp");
 			dispatcher.forward(request, response);
@@ -279,23 +279,27 @@ public class Controller_Store extends HttpServlet {
 			boolean cvvValid = validateCvv(cvv);
 			
 			// TODO validate names with .matches(regex)
-			boolean firstNameValid = firstName.matches("^[a-zA-Z]$");
-			boolean lastNameValid = lastName.matches("^[a-zA-Z]$");
-			
+			System.out.println(firstName);
+			System.out.println(lastName);
+			boolean firstNameValid = firstName.matches("^[a-zA-Z]+$");
+			boolean lastNameValid = lastName.matches("^[a-zA-Z]+$");
+			System.out.println(firstNameValid);
+			System.out.println(lastNameValid);
 			
 			// if some payment field is invalid send to failure page with failMsg
-			if (!cardNumberValid) {
-				failMsg += "\nCredit card number is invalid!";
-			}
-			if (!cvvValid) {
-				failMsg += "\nCVV number is invalid!";
-			}
 			if (!firstNameValid) {
-				failMsg += "\nFirst name is invalid!";
+				failMsg += " First name is invalid!";
 			}
 			if (!lastNameValid) {
-				failMsg += "\nLast name is invalid!";
+				failMsg += " Last name is invalid!";
 			}
+			if (!cardNumberValid) {
+				failMsg += " Credit card number is invalid!";
+			}
+			if (!cvvValid) {
+				failMsg += " CVV number is invalid!";
+			}
+			
 			
 			// if any validation failed, send to fail page
 			if (!cardNumberValid || !cvvValid || !firstNameValid || !lastNameValid) {
@@ -303,25 +307,26 @@ public class Controller_Store extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/purchase_fail_page.jsp");
 				dispatcher.forward(request, response);
 			}
-			
-			// create iterator to go through shopping cart
-			ListIterator<Product> iterator = shoppingCart.listIterator();
-			Product tempProduct;
-			
-			// decrement inventory count and remove objects from shopping cart
-			while (iterator.hasNext()) {
-				tempProduct = iterator.next();
-				productDao.updateQuantity(tempProduct);
-				iterator.remove();
+			else {
+				// create iterator to go through shopping cart
+				ListIterator<Product> iterator = shoppingCart.listIterator();
+				Product tempProduct;
+				
+				// decrement inventory count and remove objects from shopping cart
+				while (iterator.hasNext()) {
+					tempProduct = iterator.next();
+					productDao.updateQuantity(tempProduct);
+					iterator.remove();
+				}
+				
+				// set the now emptied shopping cart in the session object
+				session.setAttribute("shopping_cart", shoppingCart);
+				request.setAttribute("confirmation_number", UUID.randomUUID());
+				
+				// get dispatcher and set destination to checkout page
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/confirmation_page.jsp");
+				dispatcher.forward(request, response);	
 			}
-			
-			// set the now emptied shopping cart in the session object
-			session.setAttribute("shopping_cart", shoppingCart);
-			request.setAttribute("confirmation_number", UUID.randomUUID());
-			
-			// get dispatcher and set destination to checkout page
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/confirmation_page.jsp");
-			dispatcher.forward(request, response);
 			
 		}
 	}
